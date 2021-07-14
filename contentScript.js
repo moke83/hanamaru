@@ -92,15 +92,15 @@ output = (user, chat) => {
 		const d = new Date();
 		
 		d.setTime(user.created),
-		console.log(`${user.name}さんの初見`, d.toLocaleDateString(undefined, LOCALE_OPTION), d.toLocaleTimeString());
+		console.info(`${user.name}さんの初見`, d.toLocaleDateString(undefined, LOCALE_OPTION), d.toLocaleTimeString());
 		
 	}
 	
 	console.log(
-			`[${(''+ (chat.no ||= '')).padStart(3,'0')}]`,
+			`[${(''+ (chat.no ||= '')).padStart(3,'0')}:${(''+l).padStart(2,'0')}]`,
 			chat.content,
 			user.name === user.id ? '184' : `@${user.name}`,
-			`${user.id}:${l}`
+			user.id
 		);
 	
 	if (onSpeak && typeof chat.no === 'number' && last_res <= chat.no) {
@@ -179,6 +179,8 @@ onCommentViewer(),
 
 // work only on Firefox; to specify "window." must be required at this expression.
 window.eval('window.reg='+name.toString()+',window.unreg='+init.toString()+';');
+
+//TODO: /nicoad
 
 };
 
