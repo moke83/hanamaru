@@ -30,7 +30,7 @@ onCommentViewer = () => {
 	const d = new Date();
 	
 	d.setTime(+PRG_PROP.program.beginTime*1000),
-	console.log(`[提供: はな] "${PRG_PROP.program.title}" @${d.toLocaleDateString(undefined, LOCALE_OPTION)} ${d.toLocaleTimeString()}`),
+	console.log(`[有志提供] "${PRG_PROP.program.title}" @${d.toLocaleDateString(undefined, LOCALE_OPTION)} ${d.toLocaleTimeString()}`),
 	
 	(storage = JSON.parse(localStorage.getItem("ncv-user-list"))) ||
 		localStorage.setItem("ncv-user-list", JSON.stringify(storage = {})),
