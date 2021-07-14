@@ -30,7 +30,7 @@ onCommentViewer = () => {
 	const d = new Date();
 	
 	d.setTime(+PRG_PROP.program.beginTime*1000),
-	console.log(`[有志提供] "${PRG_PROP.program.title}" @${d.toLocaleDateString(undefined, LOCALE_OPTION)} ${d.toLocaleTimeString()}`),
+	console.log(`[篤志提供] "${PRG_PROP.program.title}" @${d.toLocaleDateString(undefined, LOCALE_OPTION)} ${d.toLocaleTimeString()}`),
 	
 	(storage = JSON.parse(localStorage.getItem("ncv-user-list"))) ||
 		localStorage.setItem("ncv-user-list", JSON.stringify(storage = {})),
@@ -51,8 +51,10 @@ openCommentWS = event => {
 	
 	const data = JSON.parse(event.data);
 	
-	data.type === "room" &&
-		new WebSocket((threadData = data.data).messageServer.uri).addEventListener('open', opendCommentWS, { once: true });
+	data.type === "room" && (
+			event.target.removeEventListener('message', openCommentWS),
+			new WebSocket((threadData = data.data).messageServer.uri).addEventListener('open', opendCommentWS, { once: true })
+		);
 	
 },
 opendCommentWS = event => {
