@@ -105,7 +105,7 @@ onCommentReceived = event => {
 output = (user, chat, isFirst) => {
 	
 	const	us = stat[user.id] ||= { logs: [] },
-			name = `${user.id.padEnd(27 - (user.name === user.id ? 0 : monoLength(user.name) + 1), ' ')}${user.name === user.id ? '' : ` "${user.name}"`}`;
+			name = `${user.id.padEnd(27 - (user.name === user.id ? 0 : monoLength(user.name) + 3), ' ')}${user.name === user.id ? '' : ` "${user.name}"`}`;
 	let	l;
 	
 	if (us.logs[l = us.logs.length] = chat, ++l === 1) {
