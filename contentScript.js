@@ -120,6 +120,7 @@ output = (user, chat, isFirst) => {
 	console.log(
 			`[${(''+ (chat.no ||= '')).padStart(3,'0')}:${(''+l).padStart(2,'0')}]`,
 			name.length > 27 ? '...' + name.substring(name.length - 24) : name,
+			'💬',
 			chat.content
 		);
 	
