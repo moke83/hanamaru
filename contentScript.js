@@ -229,7 +229,7 @@ getLogs = event => {
 			logs[i0] = $, $ = logs[i0 = i] = $0;
 			continue;
 		}
-		if (i0 === l0 && !($ = logs[i0 = ++i])) break;
+		i0 === l0 && ($ = logs[i0 = ++i]);
 	}
 	
 	console.log(event.detail ? data : JSON.stringify(data, undefined, '\t')),
