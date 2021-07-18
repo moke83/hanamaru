@@ -102,10 +102,10 @@ onCommentReceived = event => {
 	}
 	
 },
-output = (user, chat, isFirst) => {
+output = (user, chat) => {
 	
 	const	us = stat[user.id] ||= { logs: [] },
-			name = `${user.id.padEnd(27 - (user.name === user.id ? 0 : monoLength(user.name) + 3), ' ')}${user.name === user.id ? '' : ` "${user.name}"`}`;
+			name = `${user.id.padEnd(27 - ((chat.name = user.name) === user.id ? 0 : monoLength(user.name) + 3), ' ')}${user.name === user.id ? '' : ` "${user.name}"`}`;
 	let	l;
 	
 	if (us.logs[l = us.logs.length] = chat, ++l === 1) {
@@ -211,6 +211,31 @@ getStorageData = event => {
 	console.log(event.detail % 2 ? data : JSON.stringify(data));
 	
 },
+getLogs = event => {
+	
+	const d = new Date(), data = { logs: [], program: PRG_PROP }, logs = data.logs;
+	let i,i0,l,l0,k,$,$0;
+	
+	d.setTime(+PRG_PROP.program.beginTime * 1000);
+	
+	for (k in stat) {
+		i = -1;
+		while (stat[k].logs[++i]) logs[logs.length] = stat[k].logs[i];
+	}
+	
+	$ = logs[i = i0 = 0], l0 = (l = logs.length) - 1;
+	while ($0 = logs[++i0]) {
+		if (+$.date > +$0.date) {
+			logs[i0] = $, $ = logs[i0 = i] = $0;
+			continue;
+		}
+		if (i0 === l0 && !($ = logs[i0 = ++i])) break;
+	}
+	
+	console.log(event.detail ? data : JSON.stringify(data, undefined, '\t')),
+	console.log(`${d.getFullYear()}-${(d.getMonth() + 1 +'').padStart(2,'0')}${(d.getDate()+'').padStart(2,'0')}-${(d.getHours()+'').padStart(2,'0')}${(d.getMinutes()+'').padStart(2,'0')}.html`);
+	
+},
 
 name = function (id, name) {
 	
@@ -231,22 +256,29 @@ getstat = function (asObject = false) {
 	
 	dispatchEvent(new CustomEvent('getdata', { detail: asObject ? 3 : 2 }));
 	
+},
+getlogs = function (asObject = false) {
+	
+	dispatchEvent(new CustomEvent('getlogs', { detail: asObject }));
+	
 };
 
 addEventListener('name', regName, false, true),
 addEventListener('init', clearStorage, false, true),
 addEventListener('getdata', getStorageData, false, true),
 addEventListener('getstat', getStorageData, false, true),
+addEventListener('getlogs', getLogs, false, true),
 
 onCommentViewer(),
 
-// コンソールで udata() を実行するとローカルストレージに蓄えられているすべてのユーザーデータ情報を、
+// udata() を実行するとローカルストレージに蓄えられているすべてのユーザーデータ情報を、
 // ustat() を実行すると実行中に一時的に蓄えられている現在の配信のチャット情報を返す。
+// chat() を実行すると、時系列に沿ったチャットログを列挙した配列と番組情報をプロパティにしたオブジェクト返す。
 // それぞれ引数に true, false 相当の値を指定すると、true の場合はツリー形式に表示される Object として、false の場合は JSON として表示する。
 // unreg() の場合、ローカルストレージをすべて削除。reg() の場合、第一引数に id を、第二引数に名前を入力すると手動によるユーザー登録、更新を行う。
 // 第二引数が未指定の場合、該当する id のユーザー情報を削除する。
-// work only on Firefox; the "window." in the following line is required.
-window.eval('window.reg='+name.toString()+',window.unreg='+init.toString()+',window.udata='+getdata.toString()+',window.ustat='+getstat.toString()+';');
+// chat() を実行するとチャットログを
+window.eval('window.reg='+name.toString()+',window.unreg='+init.toString()+',window.udata='+getdata.toString()+',window.ustat='+getstat.toString()+',window.chat='+getlogs.toString()+';');
 
 //never TODO: /nicoad
 
