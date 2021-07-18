@@ -224,13 +224,8 @@ getLogs = event => {
 	}
 	
 	$ = logs[i = i0 = 0], l0 = (l = logs.length) - 1;
-	while ($0 = logs[++i0]) {
-		if (+$.date > +$0.date) {
-			logs[i0] = $, $ = logs[i0 = i] = $0;
-			continue;
-		}
-		i0 === l0 && ($ = logs[i0 = ++i]);
-	}
+	while ($0 = logs[++i0])
+		+$.date > +$0.date ? (logs[i0] = $, $ = logs[i0 = i] = $0) : i0 === l0 && ($ = logs[i0 = ++i]);
 	
 	console.log(event.detail ? data : JSON.stringify(data, undefined, '\t')),
 	console.log(`${d.getFullYear()}-${(d.getMonth() + 1 +'').padStart(2,'0')}${(d.getDate()+'').padStart(2,'0')}-${(d.getHours()+'').padStart(2,'0')}${(d.getMinutes()+'').padStart(2,'0')}.json`);
