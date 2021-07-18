@@ -277,7 +277,6 @@ onCommentViewer(),
 // それぞれ引数に true, false 相当の値を指定すると、true の場合はツリー形式に表示される Object として、false の場合は JSON として表示する。
 // unreg() の場合、ローカルストレージをすべて削除。reg() の場合、第一引数に id を、第二引数に名前を入力すると手動によるユーザー登録、更新を行う。
 // 第二引数が未指定の場合、該当する id のユーザー情報を削除する。
-// chat() を実行するとチャットログを
 window.eval('window.reg='+name.toString()+',window.unreg='+init.toString()+',window.udata='+getdata.toString()+',window.ustat='+getstat.toString()+',window.chat='+getlogs.toString()+';');
 
 //never TODO: /nicoad
